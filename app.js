@@ -15,8 +15,15 @@ app.get('/', function(req, res){
   res.end();
 });
 
+app.get('/date', function(req, res){
+	console.log('date Request');
+	fs.readFile('data/date.json', function(err, data){
+		var current = JSON.parse(data);
+		res.end(JSON.stringify({'date': current}));
+	});
+});
+
 app.get('/request-zipcode/:zip', function(req, res){
-	console.log('request');
 	var path = req.originalUrl.split('/');
 	var param = path[path.length-1];
 	var fileName = param + '.json';

@@ -1,6 +1,28 @@
 angular.module('listApp', 
-	['ngResource'])
-	
+	['ngResource', 'ngRoute'])
+
+  .config(['$routeProvider', function($routeProvider){
+    $routeProvider.when('/request-zipcode', {
+        templateUrl: 'template.html',
+        controller: 'listCtrl',
+        resolve: {
+          dateFactory: 'dateFactory',
+          currentDate: function(dateFactory){
+            return dateFactory.pull().$promise;
+          }
+        },
+      })
+      .otherwise({
+        redirectTo: '/request-zipcode'
+      });
+  }])
+  .factory('dateFactory', ['$resource', function($resource){
+    return $resource('/date', {}, {
+      pull: {
+        method: 'GET',
+      }
+    });
+  }])
 	.factory('listFactory', ['$resource', function($resource){
 	 return $resource('/request-zipcode/:zip', {}, {
       request: {
@@ -9,8 +31,9 @@ angular.module('listApp',
       }
    });
 	}])
-	.controller('listCtrl', ['$scope', 'listFactory', function($scope, listFactory){
-		$scope.loc = '';
+	.controller('listCtrl', ['$scope', 'listFactory', 'currentDate', function($scope, listFactory, currentDate){
+		$scope.date = currentDate.date;
+    $scope.loc = '';
     $scope.add = '';
     $scope.city = '';
     $scope.zip = '';

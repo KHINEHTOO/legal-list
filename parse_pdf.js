@@ -4,7 +4,7 @@ var JSONParser = require('./parse_json.js');
 var files = fs.readdirSync('input/pdfs');
 var count = 0;
 files.forEach(function(fileName, i){
-  exec('cd pdf2json  && node pdf2json.js -f ../input/pdfs/'+ fileName +' -o ../input/json_files', function(error, stdout, stderr){
+  exec('cd node_modules/pdf2json  && node pdf2json.js -f ../../input/pdfs/'+ fileName +' -o ../../input/json_files', function(error, stdout, stderr){
     console.log('stdout ' + stdout);
     console.log('stderr ' + stderr);
     count++;
