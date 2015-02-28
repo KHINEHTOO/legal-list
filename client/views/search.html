@@ -1,0 +1,14 @@
+<div class="container">
+  <form class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Enter Zip Code" ng-model="input">
+    </div>
+    <button type="submit" class="btn btn-primary" ng-click='triggerRequest(input)'>
+      Submit
+    </button>
+  </form>
+  <div class="text-right"> 
+    last updated on {{date}}
+  </div>
+</div>
+<div ui-view></div>
