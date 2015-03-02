@@ -13,15 +13,12 @@
           <td>      
             <input type="text" placeholder="City" ng-model="search.City">
           </td>
-          <td ng-show="validZip()">
-            {{zip}}
-          </td>
-          <td ng-show="!validZip()">
+          <td>
             Zipcode
           </td>
         </tr>
       </thead>
-      <tbody ng-repeat='place in places | filter:search' ng-show="places.length > 0">
+      <tbody ng-repeat='place in places | filter:search'>
         <tr>
           <td>{{place.Location}}</td>
           <td>{{place.Address}}</td>
@@ -30,8 +27,5 @@
         </tr>  
       </tbody>
     </table>
-      <h3 class="text-center" ng-show="noResults">
-        Invalid Input: <small>Zip Code Invalid or Not Found</small>
-      </h3>
   </div>
 </div>

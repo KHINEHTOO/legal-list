@@ -1,4 +1,6 @@
-angular.module('app.config', [])
-  .config(['$urlRouterProvider', function($urlRouterProvider){
-    $urlRouterProvider.otherwise('/search');
-  }]);
+(function(){
+  angular.module('app.config', [])
+    .config(['$urlRouterProvider', function($urlRouterProvider){
+      $urlRouterProvider.otherwise('/search');
+    }]);
+})();
