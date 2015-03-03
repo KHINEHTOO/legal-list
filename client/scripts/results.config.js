@@ -1,6 +1,6 @@
 (function(){
   angular.module('results.config', [])
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+    .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search.results', {
         url: '/:zip',
         templateUrl: '../views/results.html',

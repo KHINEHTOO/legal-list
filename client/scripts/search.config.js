@@ -1,6 +1,6 @@
 (function(){
   angular.module('search.config', [])
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+    .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search', {
         url: '/search',
         templateUrl: '../views/search.html',
