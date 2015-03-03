@@ -14,13 +14,11 @@
       };
     }]);  
     var validZip = function(value){
-      if(value.length === 5){
-        var allNums = value.split('').every(function(character){
-          return isNaN(parseInt(character)) === false;
-        });
-        if(allNums){
-          return true;
-        }
+      var allNums = value.split('').every(function(character){
+        return isNaN(parseInt(character)) === false;
+      });
+      if(allNums){
+        return true;
       }
       return false;
     };
