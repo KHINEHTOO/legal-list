@@ -6,10 +6,9 @@
         templateUrl: '../views/search.html',
         controller: 'searchCtrl',
         resolve: {
-          dateFactory: 'dateFactory',
-          currentDate: function(dateFactory){
+          currentDate: ['dateFactory', function(dateFactory){
             return dateFactory.pull().$promise;
-          }
+          }]
         },
       });
     }]);

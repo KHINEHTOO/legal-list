@@ -43,7 +43,7 @@
   
 (function(){
   angular.module('results.config', [])
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+    .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search.results', {
         url: '/:zip',
         templateUrl: '../views/results.html',
@@ -95,16 +95,15 @@
 
 (function(){
   angular.module('search.config', [])
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+    .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search', {
         url: '/search',
         templateUrl: '../views/search.html',
         controller: 'searchCtrl',
         resolve: {
-          dateFactory: 'dateFactory',
-          currentDate: function(dateFactory){
+          currentDate: ['dateFactory', function(dateFactory){
             return dateFactory.pull().$promise;
-          }
+          }]
         },
       });
     }]);
