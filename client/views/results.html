@@ -18,8 +18,8 @@
           </td>
         </tr>
       </thead>
-      <tbody ng-repeat='place in places | filter:search'>
-        <tr>
+      <tbody>
+        <tr ng-repeat='place in places | filter:search'>
           <td>{{place.Location}}</td>
           <td>{{place.Address}}</td>
           <td>{{place.City}}</td>
