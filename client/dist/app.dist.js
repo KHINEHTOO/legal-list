@@ -115,13 +115,13 @@
       $scope.date = currentDate.date;
       $scope.input ='';
       $scope.triggerRequest = function(input){
-          if(validZip(input)){
-            $state.go('search.results', {
-              'zip': input
-            });    
-          }else{
-            $state.go('search.invalid');
-          }  
+        if(validZip(input)){
+          $state.go('search.results', {
+            'zip': input
+          });    
+        }else{
+          $state.go('search.invalid');
+        }  
       };
     }]);  
     var validZip = function(value){
