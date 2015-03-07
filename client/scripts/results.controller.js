@@ -1,6 +1,6 @@
 (function(){
   angular.module('results.controller', [])
-    .controller('resultsCtrl', [ '$scope', 'data', function($scope, data){
+    .controller('ResultsCtrl', [ '$scope', 'data', function($scope, data){
       $scope.places = data;
     }])
     .filter('input', function(){
