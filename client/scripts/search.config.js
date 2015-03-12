@@ -1,4 +1,7 @@
 (function(){
+  //all config modules define a state and resolve a service to populate
+  //data to named controllers. This config resolves the creation date as
+  //well as populating input fields if linking to previous search queries
   angular.module('search.config', [])
     .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search', {

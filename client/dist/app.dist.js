@@ -1,4 +1,6 @@
 (function(){
+  //front-end routing to re-route unknown routes to /search
+  //initializes search state after re-route
   angular.module('app.config', [])
     .config(['$urlRouterProvider', function($urlRouterProvider){
       $urlRouterProvider.otherwise('/search');
@@ -6,14 +8,17 @@
 })();
 
 (function(){
+  //all angular modules are written in IIFEs to protect global namespace.
+  //all controllers, services, and config files written in seperate modules.
+  //this helps in bug hunting and limiting overall complexity to individual modules. 
   angular.module('listApp', [
     'ngResource', 
     'ui.router',
     'app.config', 
     'search.config',
+    'date.service',
     'search.controller',
     'map.directive',
-    'date.service',
     'results.config',
     'results.service',
     'results.controller',
@@ -22,6 +27,7 @@
 })();
 
 (function(){
+  //this service retrieves date that files were updated via back-end api
   angular.module('date.service', [])
     .factory('dateFactory', ['$resource', function($resource){
       return $resource('/date', {}, {
@@ -33,6 +39,8 @@
 })();
 
 (function(){
+  //state is so small it does not need a controller or seperate template file.
+  //notifies the user when they have entered an invalid or unknown search query.
   angular.module('invalid.config', [])
     .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search.invalid', {
@@ -43,6 +51,9 @@
 })();
   
 (function(){
+  //this directive ties through attribute $scope.source from search.controller
+  //and watches for changes to the source element to populate to the Google maps
+  //iframe to re-render for new api calls.
   angular.module('map.directive', [])
     .directive('mapDirective', function(){
       return {
@@ -62,6 +73,8 @@
 })();
 
 (function(){
+  //resolves results from user query from results factory to populate 
+  //results controller from results.service module.
   angular.module('results.config', [])
     .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search.results', {
@@ -85,6 +98,9 @@
 })();
   
 (function(){
+  //populates data into $scope to be displayed in a table for viewing
+  //the filter is set up to filter based on user parameters in input boxes
+  //above each table column.
   angular.module('results.controller', [])
     .controller('ResultsCtrl', [ '$scope', 'data', function($scope, data){
       $scope.places = data;
@@ -102,6 +118,7 @@
 })();
 
 (function(){
+  //this service calls back-end api to retreive information from user input
   angular.module('results.service', [])
     .factory('resultsFactory', ['$resource', function($resource){
       return $resource('/request-zipcode/:zip', {}, {
@@ -114,6 +131,9 @@
 })();
 
 (function(){
+  //all config modules define a state and resolve a service to populate
+  //data to named controllers. This config resolves the creation date as
+  //well as populating input fields if linking to previous search queries
   angular.module('search.config', [])
     .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search', {
@@ -138,6 +158,10 @@
 })();
 
 (function(){
+  //controller handles resolved services data, formatting the url for api calls for google
+  //mmaps, validating user input and requesting geolocation data from user.
+  //if user query is valid app will change states to results state and update
+  //the state parameters.
   angular.module('search.controller', [])
     .controller('SearchCtrl',['$scope', 'currentDate', '$state', 'currentPath', '$window', function($scope, currentDate, $state, currentPath, $window){
       $scope.geoLocation = null;
@@ -164,6 +188,8 @@
         return false;
       };
       if(!$scope.geoLocation){
+        //because getCurrentPosition is async, need to use $apply method to have
+        //angular run digest cycle when information becomes available.
         $window.navigator.geolocation.getCurrentPosition(function(position){
           $scope.$apply(function(){
             $scope.geoLocation = {

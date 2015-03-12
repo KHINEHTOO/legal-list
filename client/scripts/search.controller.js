@@ -1,4 +1,8 @@
 (function(){
+  //controller handles resolved services data, formatting the url for api calls for google
+  //mmaps, validating user input and requesting geolocation data from user.
+  //if user query is valid app will change states to results state and update
+  //the state parameters.
   angular.module('search.controller', [])
     .controller('SearchCtrl',['$scope', 'currentDate', '$state', 'currentPath', '$window', function($scope, currentDate, $state, currentPath, $window){
       $scope.geoLocation = null;
@@ -25,6 +29,8 @@
         return false;
       };
       if(!$scope.geoLocation){
+        //because getCurrentPosition is async, need to use $apply method to have
+        //angular run digest cycle when information becomes available.
         $window.navigator.geolocation.getCurrentPosition(function(position){
           $scope.$apply(function(){
             $scope.geoLocation = {

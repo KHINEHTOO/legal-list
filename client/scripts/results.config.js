@@ -1,4 +1,6 @@
 (function(){
+  //resolves results from user query from results factory to populate 
+  //results controller from results.service module.
   angular.module('results.config', [])
     .config(['$stateProvider', function($stateProvider){
       $stateProvider.state('search.results', {
