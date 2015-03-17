@@ -1,31 +1,29 @@
 <div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">Filter Using Input fields below:</div>
-    <table class="table table-striped">
-      <thead>
-        <tr class="warning">
-          <td>
-            <input type="text" placeholder="Location" ng-model="search.Location">
-          </td>
-          <td>
-            <input type="text" placeholder="Address" ng-model="search.Address">
-          </td>
-          <td>      
-            <input type="text" placeholder="City" ng-model="search.City">
-          </td>
-          <td>
-            Zipcode
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat='place in places | filter:search'>
-          <td>{{place.Location}}</td>
-          <td>{{place.Address}}</td>
-          <td>{{place.City}}</td>
-          <td>{{place.Zip}}</td>
-        </tr>  
-      </tbody>
-    </table>
-  </div>
+  <div class="panel-heading">Filter Using Input Fields Below:</div>
+  <table class="table table-striped">
+    <thead>
+      <tr class="warning">
+        <td>
+          <input type="text" placeholder="Location" ng-model="search.Location">
+        </td>
+        <td>
+          <input type="text" placeholder="Address" ng-model="search.Address">
+        </td>
+        <td>      
+          <input type="text" placeholder="City" ng-model="search.City">
+        </td>
+        <td>
+          Zipcode
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat='place in places | filter:search'>
+        <td>{{place.Location}}</td>
+        <td>{{place.Address}}</td>
+        <td>{{place.City}}</td>
+        <td>{{place.Zip}}</td>
+      </tr>  
+    </tbody>
+  </table>
 </div>

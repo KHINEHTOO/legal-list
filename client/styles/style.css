@@ -1,0 +1,8 @@
+@media (max-width: 670px){
+  .table{ 
+    width: 600px;
+  }
+  .panel-default{
+    width: 110%;
+  }
+}
