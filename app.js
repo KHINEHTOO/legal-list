@@ -4,10 +4,17 @@ var app = express();
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
 
+//instantiate sub modules
+require('./tools/idle-cron.js');
+
+//allow for JSON parsing 
 app.use(bodyParser.json());
-//set static directory for all style script and template files
+
+//set static directory for all style and script files
 app.use(express.static(__dirname + '/client'));
+//render html files as ejs templates
 app.engine('html', ejs.renderFile);
+//serve all views from the client directory
 app.set('views', __dirname + '/client');
 app.set('port', (process.env.PORT || 4000));
 

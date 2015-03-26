@@ -6,7 +6,9 @@
   "dependencies": {
     "body-parser": "^1.12.0",
     "ejs": "^2.3.1",
-    "express": "^4.12.0"
+    "express": "^4.12.0",
+    "node-crontab": "0.0.8",
+    "request": "^2.54.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
